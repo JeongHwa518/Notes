@@ -54,3 +54,19 @@
             - tuple, record
         - 테이블
             - 행과 열 값들의 모음을 나타내는 것
+
+    3) 샘플 설치하기
+        wget https://downloads.mysql.
+
+
+            sudo mysql -u root -p
+
+7. ERD (Entity relationship diagram)
+    1) 테이블 간의 관계를 표현한 그림
+    2) 논리 모델과 물리 모델 
+        - 논리 모델은 데이터 모델의 첫단계
+            - 고객의 요구사항 수집, 분석해서 전체 모양 구성
+        - 물리 모델은 논리 모델을 바탕으로 실제 저장할 수 있는 모델을 표현한 것임
+
+8. 주문 테이블 
+    1) 
