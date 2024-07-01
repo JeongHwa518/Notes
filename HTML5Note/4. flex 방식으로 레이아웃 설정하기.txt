@@ -1,0 +1,15 @@
+1. 부모 요소에 flex 적용하기
+    1) 속성명
+        - display
+            - flex : 자신은 블록 속성을 유지하면서 자식 요소에 flex 환경 설정
+            - inline-flex : 자신을 인라인 속성으로 변경하면서 자식 요소에 flex 환경 설정
+        - flex-direction
+            - row : flex의 기본축을 가로로 지정함
+            - column : flex의 기본축을 세로로 지정함
+            - row-reverse : 자식 요소 컨텐츠를 가로 역순으로 정렬함
+            - column-reverse : 자식 요소 컨텐츠를 세로 역순으로 정렬함
+        - flex-wrap
+            - nowrap : 자식 요소의 줄 바꿈 하지 않음
+            - wrap : 자식 요소의 줄 바꿈 함
+        - flex-flow (flex-direction과 flex-wrap 속성의 축약문)
+            - row wrap 
