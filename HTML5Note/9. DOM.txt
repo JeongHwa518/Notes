@@ -57,6 +57,11 @@
                 - 요소 안의 있는 태그까지 함께 가져올 경우
             - 웹 요소.textContent
                 - 웹 요소의 내용을 가져올 경우
+    2) 웹 요소의 내용 수정하기
+        - 형식
+            - 웹 요소.innerText = 내용
+            - 웹 요소.innerHTML = 내용
+            - 웹 요소.textContent = 내용
         - 형식
             - 이미지 요소.src = 이미지 파일
 
@@ -82,3 +87,50 @@
         - 특정 클래스 스타일이 있는 요소를 찾아주기
             - 형식 
                 - 요소.classList.contains(클래스명)
+
+        - 클래스 스타일 토글하기
+            - 형식
+                - 요소.claaList.toggle(클래스명)
+
+7. DOM에서 form 다루기
+    1) 회원 가입, 물품 구매 문서 등 
+        웹 문서에서 사용자가 정보를 입력할 수 있게 만들어 놓은 웹 요소 => form(폼)
+
+    2) 폼 요소에 접근하고 값을 가져오는 방법
+        - id나 class 속성값을 사용해 폼 요소에 접근
+        - 텍스트 필드에 입력한 값 가져오기
+            - value 프로퍼티 사용하면 폼 요소 중 텍스트 필드나 이메일 필드
+                사용자가 입력한 값을 가져올 수 있음.
+            - 형식
+                - 요소.value
+        - name 속성값을 사용해 폼 요소에 접근
+        
+        - 폼 배열을 사용해 폼 요소에 접근
+            - document.forms
+                - 모든 form을 가져옴.
+            - document.forms[0].elements
+                - 첫번째 form에 있는 폼 요소를 모두 가져옴
+         - 콘솔 적용 예)   
+            - document.forms[0].elements[0].value
+                'kosta' <- 아이디 값 가져옴.
+            - document.forms[0].elements[1].value
+                '1234' <- 패스워드 값 가져옴.
+        
+        - 선택 목록에 접근하기
+        - 콘솔 적용 예)
+            - document.querySelector("#major")
+            - document.querySelector("#major").options
+                - HTMLOptionsCollection(7)
+                    - selectedIndex: 0
+
+        - 라디오 버튼과 체크 박스에 접근하기
+            - 라디오 버튼 접근하기
+                - document.requestForm.subject
+                - value 항목에 선택한 항목의 value 값이 들어있음.
+            - 체크 박스 접근하기
+                - document.requestForm.mailing
+                - document.requestForm.mailing[0].value
+                
+                - checked 속성을 사용해 선택한 항목에 접근하기
+                    - document.querySelector("input[name='mailing']:checked")
+                    - document.querySelectorAll("input[name='mailing']:checked")
