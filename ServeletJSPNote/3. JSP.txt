@@ -1,4 +1,8 @@
 1. 지시어 (Directive)
- 1) page 지시어
-    - import 속성
-    
+   1) page 지시어
+      - import 속성
+      - errorPage 속성 : 에러 페이지 지정
+      - IsErrorPage 속성 : 에러 페이지 (true값 설정)
+   2) include 지시어
+      - 여러 페이지에서 반복되어 사용하는 내용을 삽입해야 하는 경우 사용
+      - <%@ %> 
