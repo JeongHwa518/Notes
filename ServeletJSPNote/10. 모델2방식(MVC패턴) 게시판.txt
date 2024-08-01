@@ -32,3 +32,39 @@
             |
            \|/
         수정 하기       삭제하기
+
+    5) 요청명 정의
+
+        기능            매핑방법        요청명                   controller(servlet)       view(jsp)
+        ------------------------------------------------------------------------------------------------------------
+        목록보기        web.xml         /mvcboard/list.do        ListController           /board/list.jsp
+        글쓰기          web.xml         /mvcboard/write.do       WriteController          /board/write.jsp
+        상세보기
+        비밀번호 검증
+        수정
+        삭제
+        다운로드
+
+4. 목록보기
+    1) 프로세스
+                    /mvcboard/list.do
+        클라이언트 ------------------->   컨트롤러   <---------------->     모델     <---------------->   DB
+                                   (ListController.java)     (MVCBoardDTO.java,MVCBoardDAO.java)
+                                                |
+                                                |
+                                               \|/
+                                                뷰
+                                            (list.jsp)
+
+5. 글쓰기
+    1) 글쓰기 + 파일 업로드
+    2) 프로세스
+                   /mvcboard/write.do
+        클라이언트 ------------------->   컨트롤러
+                                  (WriteController.java)
+                                            |
+                                            |
+                                           \|/
+                                            뷰
+                                        (list.jsp)  ------------->    모델    --------------> DB
+                                                      (MVCBoardDTO.java,MVCBoardDAO.java)
