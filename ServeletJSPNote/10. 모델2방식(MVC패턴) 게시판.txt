@@ -68,3 +68,12 @@
                                             뷰
                                         (list.jsp)  ------------->    모델    --------------> DB
                                                       (MVCBoardDTO.java,MVCBoardDAO.java)
+    3) 파일 업로드
+        - 작성폼(form)에 추가 설정
+            - method = post
+            - enctype = multipart/form-data
+                - 서버로 전송할 때 인코딩 방식 지정 속성
+                - 모든 문자를 인코딩하지 않음
+        - 테이블 생성
+        - DTO, DAO 클래스 
+
