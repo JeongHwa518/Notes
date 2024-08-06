@@ -103,7 +103,19 @@
                                         |                          |
                                        \|/                         |
                                         뷰                        \|/
-                                    (list.jsp)  ------------->    모델    ---------------> DB
+                                    (view.jsp)  ------------->    모델    ---------------> DB
                                                    (MVCBoardDTO.java,MVCBoardDAO.java)
+
+8. 삭제하기
+                    pass.do
+    1) 클라이언트  ---------------->  컨트롤러  <---------------------
+                               (PassController.java)               |
+                                        |                          |
+                                        |                          |
+                                       \|/                         |
+                                        뷰                        \|/
+                                    (pass.jsp)  ------------->    모델    ---------------> DB
+                                                   (MVCBoardDTO.java,MVCBoardDAO.java)
+    
 
 
