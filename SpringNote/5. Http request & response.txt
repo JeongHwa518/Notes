@@ -48,6 +48,9 @@
 4. 프로토콜 (protocol)
     1) 서로 간의 통신을 위한 약속, 규칙
     2) 주고 받을 데이터에 대한 형식을 정의한 것
+        - http 요청 메시지
+            - GET : Read(얻어오기)    
+
     3) HTTP (Hyper Text Transfer Protocol)
         - 단순하고 읽기 쉬움
             - 텍스트 (HTML) 기반의 프로토콜
@@ -60,8 +63,24 @@
 5. HTTP 메세지
     1) 응답 메세지
         - 상태 코드
-            - 1xx 
+            - 1xx : Informational - 정보 교환이 목적, HTTP/1.1에 추가 (HTTP 기본이 보통 1.1)
             - 2xx : Success - 성공
-            - 3xx
+            - 3xx : Redirect - 다른 URL로 재요청
             - 4xx : Client Error - 404 Not Found 
             - 5xx : Server Error - 요청은 OK, 서버 처리중 에러
+
+6. HTTP 메서드
+    1) GET
+        - 서버의 리소스를 가져오기 위한 설계
+        - query string을 통해 전송할 데이터를 전달(소용량)
+        - URL에 데이터가 노출되므로 보안에 취약
+        - 데이터 공유에 유리 -> 전달에 유리
+        - 검색엔진에서 검색단어 전송에 이용
+
+    2) POST
+        - 서버에 데이터를 올리기 위해 설계
+        - 전송데이터 크기의 제한이 없음 (대용량)
+        - 데이터를 요청 메시지의 body에 담아 전송
+        - 보안에 유리 (HTTP + TLS암호화)
+        - 데이터 공유에는 불리
+        - 게시판에 글쓰기, 로그인, 회원가입...
