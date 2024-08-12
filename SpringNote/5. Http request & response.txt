@@ -44,6 +44,10 @@
             - 개별 프로젝트 /WEB-INF/web.xml
                 - context(프로젝트)마다 하나씩 있음
                 - web app의 개별 설정
+                    - web관련 설정 파일
+                        - servlet-context.xml
+                    - non-web관련 설정 파일
+                        - root-context.xml
 
 4. 프로토콜 (protocol)
     1) 서로 간의 통신을 위한 약속, 규칙

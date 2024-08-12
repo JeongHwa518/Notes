@@ -8,6 +8,7 @@
             - 입력 부분
                 - request 객체로 매개변수를 받지 않고, 직접 값을 받을 수도 있음
                     - spring이 자동 변환 함 (string => int)
+        - 변하는 것, 자주 변하지 않는 것 분리
 
 2. 스프링 웹 애플리케이션 (스택)
     1) 서블릿 스택
@@ -55,3 +56,38 @@
         - JDK가 제공하는 빌트인(built-in)과 직접 작성하는 커스텀으로 분류함
         - 패키지, 클래스, 메소드, 필드에 선언 할 수 있음
         - @Annotation으로 표기함
+
+8. view-controller
+    1) Controller에서 메서드가 단순히 GET방식으로 view로 URL 연결만 하고,
+       다른 하는 일은 없을 때
+    2) servlet-context.xml에 view-controller로 등록해서 사용 가능함
+
+9. URL 패턴
+    1) ?는 한글자, *는 여러 글자, **는 하위 경로 포함
+    2) 종류
+        - exact mapping
+            - /login/login.do
+            - 매칭 url
+                - http://localhost/kosta/login/login.do
+
+        - path mapping
+            - 패턴 : /login/*
+            - 매칭 url
+                - http://localhost/kosta/login/
+                - http://localhost/kosta/login/hello
+                - http://localhost/kosta/login/hello.do
+                - http://localhost/kosta/login/test
+
+        - extension mapping
+            - 패턴 : *.do
+            - 매칭 url
+                - http://localhost/kosta/hi.do
+                - http://localhost/kosta/login/hello.do
+            
+10. 필터 (Filter)
+    1) 공통적인 요청 전처리와 응답 후처리에 사용
+        - 중복코드 분리
+    2) 로깅, 인코딩(변환) 등
+    3) DispatcherServlet, AOP와 비슷함
+    4) 예
+        - 실행 시간 구하기
