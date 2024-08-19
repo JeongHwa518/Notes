@@ -20,3 +20,10 @@
           Statement, PreparedStatement
           executeUpdate(), executeQuery()
           ResultSet, close()
+
+
+2. 스프링과 JDBC
+    1) 데이터와 자바 객체를 연계하기 위해 제공되는 Spring Data 라이브러리 중 하나
+        - Spring Data JDBC
+    2) JdbcTemplate을 기반으로 DB를 쿼리할 수 있음
+    
