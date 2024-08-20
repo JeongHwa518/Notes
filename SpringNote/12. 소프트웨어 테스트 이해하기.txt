@@ -42,3 +42,46 @@
         - 3가지 규칙 모두 충족하면 암호는 강함
         - 2개의 규칙 충족하면 암호는 보통
         - 1개 이하 규칙 충족하면 암호는 약함
+
+6. jUnit 개요
+    1) Java에서 독립된 단위테스트(Unit Test)를 지원해주는 프레임워크
+    2) 단위테스트를 쉽게 해주는 테스트 지원 프레임워크
+
+7. 단위테스트 (Unit Test)
+    1) 소스 코드의 특정 모듈이 의도된 대로 정확히 작동되는지 검증하는 절차
+    2) 모든 함수와 메소드에 대한 테스트 케이스(Test case)를 작성하는 절차
+
+8. jUint의 특징
+    1) 단정(assert) 메서드로 테스트 케이스의 수행 결과를 판별함
+        - assertEquals(예상 값, 실제 값)
+    2) jUnit4부터는 테스트 지원하는 애노테이션 제공
+        - @Test 
+    3) 각 @Test 메서드가 호출할 때마다 새로운 인스턴스를 생성하여 독립적인 테스트가 이루어짐
+
+9. jUnit 라이브러리 설치
+    1) jUnit 4.12 이상 버전을 pom.xml에 추가함
+
+10. jUnit에서 테스트 지원하는 애노테이션
+    1) @Test
+        - @Test가 선언된 메서드는 테스트를 수행하는 메소드가 됨
+        - jUnit은 각각의 테스트가 서로 영향을 주지 않고 독립적으로 실행됨
+            - @Test마다 객체를 생성함
+    2) @RunWith(SpringJUnit4ClassRunner.class)
+        - jUnit 프레임워크의 테스트 실행방법을 확장할 때 사용하는 애노테이션
+        - SpringJUnit4ClassRunner라는 클래스 지정
+            - jUnit 테스트를 진행하는 중에 ApplicationContext를 만들고 관리하는 작업을 진행해 줌
+    3) @ContextConfiguration
+        - 스프링 빈(Bean) 설정 파일의 위치를 지정할 때 사용되는 애노테이션
+    4) @Autowired
+        - 스프링 DI에서 사용되는 특별한 애노테이션
+        - 해당 변수에 자동으로 빈(Bean)을 매핑해 줌
+
+11. 테스트 결과를 확인하는 단정(assert) 메서드
+    1) assertEquals(a, b)
+        - 객체 a와 객체 b가 일치함을 확인함
+    2) assertArrayEquals(a, b)
+        - 배열 a와 b가 일치함을 확인함
+    3) assertTrue(a)
+        - 조건 a가 참인가를 확인함
+    4) assertNotNull(a)
+        - 객체 a가 null이 아님을 확인함

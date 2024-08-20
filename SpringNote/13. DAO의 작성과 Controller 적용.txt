@@ -1,0 +1,39 @@
+1. DAO (Data Access Object)
+    1) 데이터(data)에 접근(access)하기 위한 객체(object)
+    2) Database에 저장된 데이터를 읽기, 쓰기, 삭제, 변경을 수행
+    3) DB 테이블당 하나의 DAO를 작성
+
+        LoginController  ---------> UserDao  --------> DB
+                         <---------          <--------
+            userDao               DataSource(ds)
+            loginForm()        selectUser(String str)
+            login()            insertUser(User u)
+            logout()           deleteUser(String s)
+            loginCheck()       updateUser(User u)
+                               deleteAll()
+
+        RegisterController 
+            userDao                 
+            register()           
+            save()
+            loginCheck()
+
+2. 데이터의 변환과 검증
+    1) 스프링 제공하는 커스텀 태그 라이브러리 사용
+        - <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+        - <form> 대신 <form:form> 사용
+        - <form:form modelAttribute="user">
+                     ||
+                     \/
+          <form id="user" action="<c:url value="/register/save" />" method="post">
+        - <form:errors>로 에러를 출력
+
+    2) Validator 인터페이스를 이용한 검증
+        - supports()
+        - validate()
+        - 컨트롤러에서 사용
+            - 'WebDataBinder'를 통해 사용자가 구현한 Validator를 추가하고, 
+              요청 데이터에 대해 검증을 실행함
+        - 검증 실행
+            - 컨트롤러 메서드에서 'BindingResult'를 파라미터로 받아서,
+              검증 후 결과를 확인하고 저장 및 처리함 
