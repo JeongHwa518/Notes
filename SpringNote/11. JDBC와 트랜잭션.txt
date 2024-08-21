@@ -26,4 +26,98 @@
     1) 데이터와 자바 객체를 연계하기 위해 제공되는 Spring Data 라이브러리 중 하나
         - Spring Data JDBC
     2) JdbcTemplate을 기반으로 DB를 쿼리할 수 있음
-    
+
+3. Transaction
+    1) AOP와 비슷
+    2) 더 이상 나눌 수 없는 작업의 단위(Tx) (ex:CRUD - 작업)
+    3) insert, update, select, delete가 각 하나의 Tx임
+    4) 예) 계좌 이체
+        - 출금(update)과 입금(update)이 하나의 Tx로 묶어야 함
+            - 출금 -----> 돈 -----> 입금
+                - 계좌 이체는 출금과 입금을 하나의 Tx로 묶어야 함
+                - '모' 아니면 '도' (All or Nothing)
+                - 둘다 성공하던지 하나만 실패해도 다 취소처리가 되어야 함
+                    - 실패하면 rollback
+
+    5) Transaction의 속성 (ACID)
+        - 원자성 (Atomicity)
+            - 나눌 수 없는 하나의 작업으로 다뤄져야 함
+        - 일관성 (Consistency)
+            - Tx 수행 전과 후가 일관된 상태를 유지해야 함
+        - 고립성 (Isolation)
+            - 각 Tx는 독립적으로 수행되어야 함
+            - Isolation level이 너무 높으면 다른 작업을 하는 사람은 기다려야 하는 상황발생
+        - 영속성 (Durability)
+            - 성공한 Tx의 결과는 유지되어야 함
+
+    6) commit, rollback
+        - 커밋
+            - 작업 내용을 DB에 영구적으로 저장
+            - 예
+                                commit                           commit
+                insert   update    |    delete   delete   update    |                
+        - 롤백
+            - 최근 변경사항을 취소 (마지막 커밋으로 복귀)
+
+    7) 자동 커밋 (Auto commit) vs 수동 커밋 (Manual commit)
+        - auto commit이 기본
+        - 자동 커밋
+            - 명령 실행 후, 자동으로 커밋이 수행 (rollback 불가)
+            - 예
+                       commit         commit         commit         commit         commit
+                insert   |    update    |    delete    |    update    |    update    |
+        - 수동 커밋
+            - 명령 실행 후 명시적으로 commit 또는 rollback을 입력
+            - 예
+                                 commit
+                insert   update    |    delete    delete    update
+
+    8) Tx의 Isolation level
+        - 각 Tx을 고립시키는 강도
+            - READ UNCOMMITED (dirty read)
+                - 커밋되지 않은 데이터도 읽기 가능
+                    - 
+                                    Tx1                             Tx2
+                            select a, b from tmp;           insert into tmp values(2, 200)   
+                a    b                              a    b
+                1   100                             1   100
+                                                    2   200
+                            select a, b from tmp;
+                a    b
+                1   100
+                2   200
+            - READ COMMITED (phantom read)
+                - 커밋된 데이터만 읽기 가능
+                    - 
+                                    Tx1                             Tx2
+                            select a, b from tmp;           insert into tmp values(2, 200)   
+                a    b                              a    b
+                1   100                             1   100
+                                                    2   200
+                            select a, b from tmp;
+                a    b
+                1   100                                            commit;
+                            select a, b from tmp;
+                a    b
+                1   100
+                2   200
+            
+            - REPEATEABLE READ
+                - Tx의 시작 후 다른 Tx의 변경은 무시됨
+                    -
+                                    Tx1                             Tx2
+                            select a, b from tmp;           insert into tmp values(2, 200)   
+                a    b                              a    b
+                1   100                             1   100
+                                                    2   200
+                            select a, b from tmp;
+                a    b
+                1   100                                            commit;
+                            select a, b from tmp;
+                a    b                              a    b
+                1   100                             1   100
+                                                    2   200
+
+            - SERIALIZABLE
+                - 한번에 하나의 Tx만 독립적으로 수행
+                - 직렬화가 될수록 성능은 떨어지고, 품질은 높아짐

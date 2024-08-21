@@ -22,7 +22,15 @@
     1) 스프링 제공하는 커스텀 태그 라이브러리 사용
         - <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
         - <form> 대신 <form:form> 사용
+            - 폼을 더욱 효과적으로 처리할 수 있음
+            - 폼 입력값 바인딩, 에러 메시지 표시, 폼 검증 등을 용이하게 해줌
+
         - <form:form modelAttribute="user">
+            - action 속성 : 자동으로 현재 URL을 폼의 액션으로 설정해 줌
+                - 기본적으로 폼을 submit할 때 현재 페이지의 주소
+            - 모델 바인딩
+                - modelAttribute 속성을 통해 모델 객체에 폼 데이터를 자동으로 바인딩함
+                - 폼 데이터를 서버로 전송할 때 컨트롤러에서 해당 데이터를 즉시 사용할 수 있음
                      ||
                      \/
           <form id="user" action="<c:url value="/register/save" />" method="post">
@@ -37,3 +45,9 @@
         - 검증 실행
             - 컨트롤러 메서드에서 'BindingResult'를 파라미터로 받아서,
               검증 후 결과를 확인하고 저장 및 처리함 
+
+    3) MessageSource
+        - 리소스에서 메시지를 읽기 위한 인터페이스
+            - 파일, 배열
+        - ResourceBundleMessageSource 등록
+            - 프로퍼티 파일을 메시지 소스로 사용
