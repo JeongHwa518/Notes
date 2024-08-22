@@ -59,3 +59,96 @@
           어드바이스 어디에 적용할지를 결정하는 포인트컷(Pointcut)을 합친 개념
         - 애스팩트는 AOP의 기본 모듈임
         - 애스펙트는 싱글톤 형태의 객체로 존재함
+
+    6) proxy
+        - target에 advice가 동적으로 추가되어 생성된 객체
+        - Spring은 프록시(proxy) 기반 AOP를 지원함
+            - Spring은 타겟(target) 객체에 대한 프록시(proxy)를 만들어 제공함
+            - 타겟을 감싸는 프록시는 runtime(실행시)에 생성됨
+        - 프록시는 어드바이스를 타겟 객체에 적용하면서 생성되는 객체
+
+    7) Weaving
+        - target에 advice를 추가해서 proxy를 생성하는 것
+        - 위빙은 포인트컷에 의해서 결정된 타겟의 조인 포인트에 부가기능(어드바이스)을 삽입하는 과정을 뜻함
+        - 위빙은 AOP가 핵심기능(타겟)의 코드에 영향을 주지 않으면서
+          필요한 부가기능(어드바이스)을 추가할 수 있도록 해주는 핵심적인 처리과정임
+
+4. Advice의 종류
+    - 설정은 XML과 애너테이션 두가지 방법으로 가능
+
+    종류                         애너테이션              설명
+  ------------------------------------------------------------------------------------------------
+    1) before advice            @Before                 메서드의 시작 부분에 추가되는 부가 기능
+                                                            - 타겟 메서드가 실행되기 이전 시점에 
+                                                              처리해야 할 필요가 있는 부가기능을 정의
+                                                            - JoinPoint 앞에서 실행되는 Advice
+    2) after advice             @After                  메서드의 끝 부분에 추가되는 부가 기능
+    3) around advice            @Around                 메서드의 시작과 끝 부분에 추가되는 부가 기능
+                                                            - 타겟 메서드가 호출되기 이전 시점과 이후 시점에
+                                                              모두 처리해야 할 필요가 있는 부가기능
+                                                            - JoinPoint 앞과 뒤에서 실행되는 Advice
+    4) after returning advice   @AfterReturning         예외가 발생하지 않았을 때 실행되는 부가 기능
+                                                            - JoinPoint 메서드 호출이 정상적으로 
+                                                              종료된 뒤에 실행되는 Advice
+    5) after throwing advice    @AfterThrowing          예외가 발생했을 때 실행되는 부가 기능
+                                                            - 예외가 발생했을 때 실행되는 Advice
+
+5. Spring AOP 구현
+    1) Advice 클래스 작성
+        - @Aspect 어노테이션을 이용해서 부가기능을 제공하는 Aspect 클래스 작성
+            - 이 Aspect 클래스는 어드바이스를 구현하는 메서드와 포인트컷을 포함함
+        - JoinPoint 인터페이스
+            - Spring AOP 혹은 AspectJ에서 AOP가 적용되는 지점을 뜻함
+            - Around 어드바이스는 JoinPoint의 하위 인터페이스인 ProceedingJoinPoint 타입의
+              파라미터를 필수적으로 선언해야 함
+              - JoinPoint 인터페이스 유용한 메서드
+                - getArgs() : 메서드 아규먼트를 반환
+                - getThis() : 프록시 객체를 반환
+                - getSignature() : 어드바이스 되는 메서드의 설명을 반환
+                - getString() : 어드바이즈 되는 메서드의 설명을 출력함
+    2) XML 설정 파일에 <aop:aspectj-autoproxy />를 설정함
+
+6. Pointcut 표현식 문법
+    1) Aspectj 포인트컷 표현식은 포인트컷 지시자를 이용하여 작성함
+    2) 포인트컷 지시자 중에서 가장 대표적으로 사용되는 것은 execution() 임
+    3) execution() 지시자를 이용한 포인트컷 표현식 구조
+
+                public, private 생략가능
+               -----------------
+    execution( [접근제한자 패턴] 리턴타입패턴 메서드이름패턴() [throws 예외패턴] )
+                                            --------------
+                                            .. 파라미터 개수에 상관없는 패턴
+                            package     class  any type and number of arguments 
+                           ------------- -  ----
+        - 예) "execution(* com.kosta.aop.*.*(..))"
+                        --                 -
+                        any return type    method
+
+               execution(* hello(..))
+                    - hello()라는 이름을 가진 메서드를 선정하는 것
+                    - 파라미터는 모든 종류를 다 허용함
+
+               execution(* hello())
+                    - 파라미터 패턴이 ()로 되어 있으니
+                      hello() 메서드 중에서 파라미터가 없는 것만 선택함
+
+               execution(* com.kosta.service.UserServiceImple.*(..))
+                    - com.kosta.service.UserServiceImple 클래스를 직접 지정하여 
+                      이 클래스가 가진 모든 메서드를 선택함
+
+               execution(* com.kosta.service.*.*(..))
+                    - com.kosta.service 패키지의 모든 클래스에 적용됨
+                    - 단 서브패키지의 클래스는 포함되지 않음
+
+               execution(* com.kosta.service..*.*(..))
+                    - com.kosta.service 패키지의 모든 클래스에 적용됨
+                    - '..'를 사용해서 서브패키지의 모든 클래스까지 포함함
+
+               execution(* *..MyMath.*(..))
+                    - 패키지에 상관없이 MyMath라는 이름의 모든 클래스에 적용됨
+                    - 다른 패키지에 같은 이름의 클래스가 있어도 적용됨
+
+7. Spring AOP 특징
+    1) Spring은 프록시(proxy) 기반 AOP를 지원함
+    2) 프록시(proxy)가 호출을 가로챔(intercept)
+    3) Spring AOP는 메서드 조인 포인트만 지원함
