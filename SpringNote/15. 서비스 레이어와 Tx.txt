@@ -48,4 +48,4 @@
 
 4. TransactionManager
     1) 일반적으로 DAO의 각 메서드는 개별 Connection을 사용하고 있음
-    2) 같은 Tx내에서 
+    2) 같은 Tx내에서 같은 Connection을 사용할 수 있게 관리
