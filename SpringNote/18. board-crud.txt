@@ -1,0 +1,11 @@
+1. 기능별 URI 정의
+    1)      작업            URI             HTTP 메서드             comment
+      ---------------------------------------------------------------------------------
+            읽기    /board/read?bno=번호        GET        지정된 번호의 게시물을 보여줌
+            삭제    /board/remove               POST       게시물 삭제함
+
+            쓰기    /board/write                GET        게시물 작성하기 위한 화면 보여줌
+                    /board/write                POST       작성한 게시물을 저장함
+
+            수정     /board/modify?bno=번호      GET        게시물을 수정하기 위해 읽어옴
+                     /board/modify              POST       수정된 게시물을 저장함
