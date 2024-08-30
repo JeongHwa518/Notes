@@ -105,3 +105,22 @@
             </select>
 
         - <choose>, <when>, <otherwise>
+            - // if ~ else if ~ else
+        - 예)
+            <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
+ 		        SELECT count(*) FROM board
+                WHERE true
+                <choose>
+                    <when test='option=="T"'>
+                        AND title LIKE concat('%', #{keyword},'%')
+                    </when>
+                    <when test='option=="W"'>
+                        AND writer LIKE concat('%', #{keyword},'%')
+                    </when>
+                    <otherwise>
+
+                    </otherwise>
+                </choose>
+ 	        </select>
+
+    2) 
