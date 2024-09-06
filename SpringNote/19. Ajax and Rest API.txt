@@ -102,7 +102,7 @@
 8. REST (REpersentational State Transfer)
     1) 웹 서비스 디자인 아키텍쳐 접근 방식
     2) 프로토콜에 독립적임, 주로 HTTP를 사용해서 구현
-        - 
+        - REST 규약을 준수하는 API  
     3) 리소스 중심의 API 디자인
         - HTTP 메서드로 수행할 작업을 정의
     4) 예
