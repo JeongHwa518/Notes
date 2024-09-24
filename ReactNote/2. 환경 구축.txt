@@ -20,8 +20,8 @@
         - npm create vite@latest 프로젝트명
     4) 프로젝트 실행
         - cd 프로젝트명
-          npm install
-          npm run dev
+        - npm install
+        - npm run dev
 
 
 3. Visual Studio Code 설정
@@ -29,5 +29,6 @@
     2) ESLint
     3) 기본 formatter 설정
         - 검색 창에 default formatter 검색 후 
-            - Prettier - Code 
-        - 검색 창에 
+            - Prettier - Code formatter 선택 
+        - 검색 창에 editor format on save 검색 후 
+        - 검색 창에 prettier semi 검색 후   

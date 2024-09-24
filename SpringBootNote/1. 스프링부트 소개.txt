@@ -54,7 +54,7 @@
                 - static 폴더
                     - 이미지, js, css 같은 정적인 웹 컨텐츠 저장
                 - templates 폴더
-                    - 타임리프(Thymleaf)같은 템플릿 기반의 웹 리소스 저장
+                    - 타임리프(Thymleaf)같은 템플릿 기반의 웹 리소스 저장 (동적)
                 - application.properties
                     - 프로젝트 전체에서 사용할 프로퍼티 정보 저장
 
