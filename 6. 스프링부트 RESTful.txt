@@ -2,4 +2,9 @@
     1) 구성
         - 리액트 (React) : 단독 애플리케이션 개발 (kmall)
         - 스프링 부트 : 데이터를 제공하는 API 서버 개발 (kmallapi)
+            - Spring Data JPA 
         - DBMS : MySQ (kamlldb)
+
+    2) JPA 연결
+        - Hikari CP 
+            - 스프링부트 2.0 이후 버전에서는 Hikari CP를 기본 DBCP로 사용
