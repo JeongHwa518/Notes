@@ -1,0 +1,5 @@
+0. 프로젝트의 환경
+    1) 구성
+        - 리액트 (React) : 단독 애플리케이션 개발 (kmall)
+        - 스프링 부트 : 데이터를 제공하는 API 서버 개발 (kmallapi)
+        - DBMS : MySQ (kamlldb)
